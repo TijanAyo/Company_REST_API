@@ -4,6 +4,8 @@ const companySchema = mongoose.Schema({
     orgName: { type: String, required: true},
     orgSuffix: { type: String },
     description: { type: String },
+    phone_no: { type: Number},
+    email: { type: String},
     logo_url: { type: String },
     location: { type: String },
     site_url: { type: String },

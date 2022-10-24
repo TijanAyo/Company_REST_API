@@ -54,7 +54,12 @@ const getCompanyInfo = async (req, res) => {
  */
 const addCompanyInfo = async (req, res) => {
     try {
-        const { orgName, description, orgSuffix, location, site_url ,logo_url, company_type, numberOfEmployees, foundedOn, ipoStatus} = req.body;
+        const {
+            orgName, description, orgSuffix, 
+            location, site_url ,logo_url, 
+            company_type, numberOfEmployees,
+            foundedOn, ipoStatus, phone_no, email
+        } = req.body;
         await addNewCompanySchema.validateAsync(req.body); 
         const companyExist = await Company.findOne({ orgName });
     
@@ -70,6 +75,8 @@ const addCompanyInfo = async (req, res) => {
                 numberOfEmployees,
                 foundedOn,
                 ipoStatus,
+                phone_no,
+                email,
             });
             return res.status(201).json( company );
         }

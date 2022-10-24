@@ -2,6 +2,8 @@ import Joi from "joi";
 
 export const addNewCompanySchema = Joi.object({
     orgName: Joi.string().required(),
+    email: Joi.string().email(),
+    phone_no: Joi.string(),
     description: Joi.string().required(),
     orgSuffix: Joi.string(),
     location: Joi.string().required(),
@@ -25,6 +27,8 @@ export const updateCompanySchema = Joi.object({
     foundedOn: Joi.date(),
     ipoStatus: Joi.string().valid('Public', 'Private'),
     numberOfExist: Joi.number(),
+    phone_no: Joi.string(),
+    email: Joi.string().email(),
 });
 
 export const deleteCompanySchema = Joi.object({
