@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.get('/explore', getAllCompaniesInfo);
 
-router.get('/explore/:companyId', getCompanyInfo);
+router.get('/explore/:orgName', getCompanyInfo);
 
 router.post('/new', addCompanyInfo);
 

@@ -1,5 +1,5 @@
 import Company from '../model/company.js';
-import { addNewCompanySchema, deleteCompanySchema } from '../validation/company.validation.js';
+import { addNewCompanySchema, updateCompanySchema, deleteCompanySchema } from '../validation/company.validation.js';
 /**
  * @route /api/v1/explore
  * @param {*} _req 
@@ -31,12 +31,12 @@ const getAllCompaniesInfo = async (_req, res) => {
  */
 const getCompanyInfo = async (req, res) => {
     try {
-        const company = await Company.findOne({_id: req.params.companyId}).select("-createdAt");
+        const company = await Company.findOne({orgName: req.params.orgName}).select("-createdAt");
         if (company) {
             return res.status(200).json(company);
         }
         return res.status(404).json({
-            message: `Company with ID: ${req.params.companyId} does not exist`
+            message: `Company with ID: ${req.params.orgName} does not exist`
         });
     }
     catch(err) {
@@ -54,7 +54,7 @@ const getCompanyInfo = async (req, res) => {
  */
 const addCompanyInfo = async (req, res) => {
     try {
-        const { orgName, description, orgSuffix, location, site_url ,logo_url, company_type, numberOfEmployees, foundedOn} = req.body;
+        const { orgName, description, orgSuffix, location, site_url ,logo_url, company_type, numberOfEmployees, foundedOn, ipoStatus} = req.body;
         await addNewCompanySchema.validateAsync(req.body); 
         const companyExist = await Company.findOne({ orgName });
     
@@ -95,6 +95,9 @@ const updateCompanyInfo = async (req, res) => {
         const company = await Company.findOne({_id: req.params.companyId});
         if(company) {
             await Company.findByIdAndUpdate(req.params.companyId, req.body, {new: true});
+
+            await updateCompanySchema.validateAsync(req.body);
+
             return res.status(201).json({
                 message: `Company info updated successfully`
             });

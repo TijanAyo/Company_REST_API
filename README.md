@@ -3,7 +3,7 @@
 This task was assigned to me by devCareer as a part of my work. The objective of this work is to carry out a CRUD operation that enables users to CREATE, READ, UPDATE, and DELETE information about IT companies.
 
 ### Installation Guide
-* Clone this repository [here](https://github.com/TijanAyo/Company_REST_API.git).
+* Clone this repository [here](https://github.com/TijanAyo/tech-companies.git).
 * The main branch is the most stable branch at any given time, ensure you're working from it.
 * Run npm install to install all dependencies
 * You can work with your locally installed MongoDB. Do configure to your choice in the application entry file.

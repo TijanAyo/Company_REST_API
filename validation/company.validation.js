@@ -10,7 +10,21 @@ export const addNewCompanySchema = Joi.object({
     company_type: Joi.string().required(),
     numberOfEmployees: Joi.number(),
     foundedOn: Joi.date().required(),
-    ipoStatus: Joi.string(),
+    ipoStatus: Joi.string().valid('Public', 'Private'),
+});
+
+export const updateCompanySchema = Joi.object({
+    orgName: Joi.string(),
+    description: Joi.string(),
+    orgSuffix: Joi.string(),
+    location: Joi.string(),
+    site_url: Joi.string(),
+    logo_url: Joi.string(),
+    company_type: Joi.string(),
+    numberOfEmployees: Joi.number(),
+    foundedOn: Joi.date(),
+    ipoStatus: Joi.string().valid('Public', 'Private'),
+    numberOfExist: Joi.number(),
 });
 
 export const deleteCompanySchema = Joi.object({
