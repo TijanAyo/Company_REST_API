@@ -4,15 +4,17 @@ const companySchema = mongoose.Schema({
     orgName: { type: String, required: true},
     orgSuffix: { type: String },
     description: { type: String },
-    phone_no: { type: Number},
-    email: { type: String},
+    phone_no: { type: String },
+    email: { type: String, default: null },
     logo_url: { type: String },
     location: { type: String },
     site_url: { type: String },
     numberOfEmployees: { type: Number },
     ipoStatus: { type: String, enum: ['Public', 'Private'], default: 'Private' },
-    founders: [{ type: String }],
     foundedOn: { type: Date, default: null},
+    foundedBy: [{
+        type: String
+    }],
     company_type: { type: String },
     numberOfExist: { type: Number, default: 0}
 },

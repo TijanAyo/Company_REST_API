@@ -55,12 +55,16 @@ const getCompanyInfo = async (req, res) => {
 const addCompanyInfo = async (req, res) => {
     try {
         const {
-            orgName, description, orgSuffix, 
-            location, site_url ,logo_url, 
+            orgName, description,
+            orgSuffix, location,
+            site_url ,logo_url, 
             company_type, numberOfEmployees,
-            foundedOn, ipoStatus, phone_no, email
+            foundedOn, ipoStatus,
+            phone_no, email, foundedBy,
         } = req.body;
-        await addNewCompanySchema.validateAsync(req.body); 
+
+        await addNewCompanySchema.validateAsync(req.body);
+
         const companyExist = await Company.findOne({ orgName });
     
         if (!companyExist) {
@@ -77,10 +81,11 @@ const addCompanyInfo = async (req, res) => {
                 ipoStatus,
                 phone_no,
                 email,
+                foundedBy,
             });
             return res.status(201).json( company );
         }
-        return res.status(400),json({
+        return res.status(400).json({
             message: 'Company already exist in database',
         });
     }
