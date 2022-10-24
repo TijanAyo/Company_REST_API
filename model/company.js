@@ -10,7 +10,7 @@ const companySchema = mongoose.Schema({
     numberOfEmployees: { type: Number },
     ipoStatus: { type: String, enum: ['Public', 'Private'], default: 'Private' },
     founders: [{ type: String }],
-    founded_date: { type: Date, default: null},
+    foundedOn: { type: Date, default: null},
     company_type: { type: String },
     numberOfExist: { type: Number, default: 0}
 },

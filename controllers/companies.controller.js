@@ -1,5 +1,11 @@
 import Company from '../model/company.js';
-
+import { addNewCompanySchema, deleteCompanySchema } from '../validation/company.validation.js';
+/**
+ * @route /api/v1/explore
+ * @param {*} _req 
+ * @param {*} res 
+ * @returns Array of object
+ */
 const getAllCompaniesInfo = async (_req, res) => {
     try {
         const companies = await Company.find({}).select("orgName description location ipoStatus");
@@ -17,6 +23,12 @@ const getAllCompaniesInfo = async (_req, res) => {
     }
 }
 
+/**
+ * @route /api/v1/explore/:companyId
+ * @param {*} req 
+ * @param {*} res 
+ * @returns Object
+ */
 const getCompanyInfo = async (req, res) => {
     try {
         const company = await Company.findOne({_id: req.params.companyId}).select("-createdAt");
@@ -34,10 +46,16 @@ const getCompanyInfo = async (req, res) => {
     }
 }
 
-
+/**
+ * @route /api/v1/new
+ * @param {*} req 
+ * @param {*} res 
+ * @returns Object
+ */
 const addCompanyInfo = async (req, res) => {
     try {
-        const { orgName, description, orgSuffix, location, site_url ,logo_url, company_type} = req.body;
+        const { orgName, description, orgSuffix, location, site_url ,logo_url, company_type, numberOfEmployees, foundedOn} = req.body;
+        await addNewCompanySchema.validateAsync(req.body); 
         const companyExist = await Company.findOne({ orgName });
     
         if (!companyExist) {
@@ -49,6 +67,8 @@ const addCompanyInfo = async (req, res) => {
                 site_url,
                 logo_url,
                 company_type,
+                numberOfEmployees,
+                foundedOn,
             });
             return res.status(201).json( company );
         }
@@ -63,7 +83,12 @@ const addCompanyInfo = async (req, res) => {
     }
 }
 
-
+/**
+ * @route /api/v1/update/:companyId
+ * @param {*} req 
+ * @param {*} res 
+ * @returns String
+ */
 const updateCompanyInfo = async (req, res) => {
     try {
         const company = await Company.findOne({_id: req.params.companyId});
@@ -84,9 +109,18 @@ const updateCompanyInfo = async (req, res) => {
     }
 }
 
+/**
+ * @route /api/v1/remove
+ * @param {*} req 
+ * @param {*} res 
+ * @returns Steing
+ */
 const deleteCompanyInfo = async (req, res) => {
     try {
         const {orgName} = req.body;
+
+        await deleteCompanySchema.validateAsync(req.body); 
+
         const titleExist = await Company.findOne({ orgName });
 
         if(titleExist) {
