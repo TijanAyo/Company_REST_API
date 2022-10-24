@@ -69,6 +69,7 @@ const addCompanyInfo = async (req, res) => {
                 company_type,
                 numberOfEmployees,
                 foundedOn,
+                ipoStatus,
             });
             return res.status(201).json( company );
         }
