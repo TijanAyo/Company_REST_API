@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended:false }));
 
 app.use('/api/v1', Company);
 
-app.get('/ping', (_req, res) => {
+app.get('/', (_req, res) => {
     return res.status(200).json('pong')
 });
 
