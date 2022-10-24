@@ -7,7 +7,7 @@ This task was assigned to me by devCareer as a part of my work. The objective of
 * The main branch is the most stable branch at any given time, ensure you're working from it.
 * Run npm install to install all dependencies
 * You can work with your locally installed MongoDB. Do configure to your choice in the application entry file.
-* Create an .env file in your project root folder and add your variables. See .env.sample for assistance.
+* Create an .env file in your project root folder and add your variables. See .env.example for assistance.
 ### Usage
 * Run npm watch:dev to start the application.
 * Connect to the API using Postman on port 8081.
